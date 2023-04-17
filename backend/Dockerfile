@@ -2,14 +2,15 @@ FROM node:16.13.0-alpine3.14
 
 #Set up working directory and navigate
 WORKDIR /home
-ENV ACCESS_TOKEN=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
+ARG ACCESS_TOKEN
+ARG GITHUB_USERNAME
 
 #Install Git and SSH
 RUN apk update && apk add git openssh curl make wget bash
 
-
 #Clone the private repository with Git credentials
-RUN git clone https://trevormil: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@github.com/bitbadges/bitbadges-indexer.git
+#Run git clone with trevormil:ACCESS_TOKEN
+RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbadges-indexer.git
 
 WORKDIR /home/bitbadges-indexer
 
