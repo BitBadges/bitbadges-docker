@@ -1,0 +1,34 @@
+FROM node:16.13.0-alpine3.14
+
+#Set up working directory and navigate
+WORKDIR /home
+ARG ACCESS_TOKEN
+ARG GITHUB_USERNAME
+
+#Install Git and SSH
+RUN apk update && apk add git openssh curl make wget bash
+
+#Clone the private repository with Git credentials
+#Run git clone with trevormil:ACCESS_TOKEN
+RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbadges-frontend.git
+
+WORKDIR /home/bitbadges-frontend
+
+RUN npm install
+RUN npm run build
+
+# Define an argument for the .env file
+# ARG ENV_FILE
+
+# COPY .env .
+# ENV $(cat $ENV_FILE | xargs)
+
+#Expose relevant ports
+EXPOSE 3000
+
+# Run npm run setup and npm run indexer
+CMD ["npm", "run", "start"]
+
+# commands
+# docker build -t bitbadges .
+# docker run -it bitbadges

@@ -39,5 +39,16 @@ services:
       - blockchain
       - couchdb
 
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    tty: true
+    ports:
+      - 3000:3000
+    depends_on:
+      - blockchain
+      - couchdb
+
 volumes:
   data:
