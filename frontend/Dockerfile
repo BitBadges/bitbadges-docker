@@ -14,6 +14,8 @@ RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbad
 
 WORKDIR /home/bitbadges-frontend
 
+RUN npm install -g npm@9.6.4
+
 RUN npm install
 RUN npm run build
 
