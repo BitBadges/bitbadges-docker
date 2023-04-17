@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  couchdb:
+    image: couchdb:latest
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    ports:
+      - 5984:5984
+    volumes:
+      - data:/opt/couchdb/data
+
+  blockchain:
+    build:
+      context: .
+      dockerfile: ./blockchain/Dockerfile
+    tty: true
+    ports:
+      - 26656:26656
+      - 26657:26657
+      - 6060:6060
+      - 9090:9090
+      - 1317:1317
+
+  express:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+      args: 
+        - ENV_FILE=.env
+    tty: true
+    ports:
+      - 3001:3001
+    depends_on:
+      - blockchain
+      - couchdb
+
+volumes:
+  data:

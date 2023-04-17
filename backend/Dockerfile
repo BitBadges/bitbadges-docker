@@ -1,0 +1,38 @@
+FROM node:16.13.0-alpine3.14
+
+#Set up working directory and navigate
+WORKDIR /home
+ENV ACCESS_TOKEN=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
+
+#Install Git and SSH
+RUN apk update && apk add git openssh curl make wget bash
+
+
+#Clone the private repository with Git credentials
+RUN git clone https://trevormil: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@github.com/bitbadges/bitbadges-indexer.git
+
+WORKDIR /home/bitbadges-indexer
+
+RUN npm install
+RUN npm run build
+
+# Define an argument for the .env file
+ARG ENV_FILE
+
+COPY .env .
+COPY server.key .
+COPY server.cert .
+
+
+
+ENV $(cat $ENV_FILE | xargs)
+
+#Expose relevant ports
+EXPOSE 3001
+
+# Run npm run setup and npm run indexer
+CMD ["npm", "run", "setup-and-run"]
+
+# commands
+# docker build -t bitbadges .
+# docker run -it bitbadges
