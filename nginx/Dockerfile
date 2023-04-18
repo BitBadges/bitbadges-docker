@@ -13,9 +13,10 @@ RUN curl https://google.com/api/v14
 RUN rm /etc/nginx/conf.d/default.conf
 
 # Copy the custom Nginx configuration file to the container
+
+COPY nginx/default.conf /etc/nginx/conf.d/
 COPY server.key /etc/nginx/ssl/server.key
 COPY server.cert /etc/nginx/ssl/server.cert
-COPY nginx/default.conf /etc/nginx/conf.d/
 
 
 # COPY --from=builder /home/bitbadges-frontend /home/bitbadges/frontend

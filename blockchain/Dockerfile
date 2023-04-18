@@ -36,7 +36,7 @@ EXPOSE 1317
 
 WORKDIR /home/bitbadgeschain
 
-ENTRYPOINT ["ignite", "chain", "serve"]
+ENTRYPOINT ["ignite", "chain", "serve", "--reset-once"]
 
 # commands
 # docker build -t bitbadges .
