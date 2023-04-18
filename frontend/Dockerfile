@@ -31,7 +31,7 @@ RUN npm run build
 RUN apk update && apk add nginx curl 
 
 #execute dummy command for cache
-RUN curl https://google.com/api/v1
+RUN curl https://google.com/api/v2
 
 COPY nginx/default.conf /etc/nginx/conf.d/
 
@@ -42,17 +42,11 @@ RUN nginx -t
 CMD ["sh", "-c", "nginx && npm run start"]
 
 # RUN systemctl status nginx
-
 # RUN npm install -g pm2
-
 # RUN pm2 start --name=website npm -- start
-
 # RUN pm2 startup systemd && exit 1
-
 # # TODO: watever is at end
-
 # RUN systemctl status pm2-bob
-
 # RUN cd /etc/nginx/sites-available
 
 
