@@ -1,4 +1,4 @@
-FROM node:16.13.0-alpine3.14
+FROM node:16.13.0-alpine3.14 as builder
 
 #Set up working directory and navigate
 WORKDIR /home
@@ -28,18 +28,21 @@ RUN npm run build
 # #Expose relevant ports
 # EXPOSE 3000
 
+FROM nginx:1.21.3-alpine
+
+#Install NPM
+RUN apk update && apk add npm
+
 EXPOSE 3000 80
 
-RUN apk update && apk add nginx curl 
+# RUN apk update && apk add nginx curl 
 
 #execute dummy command for cache
 RUN curl https://google.com/api/v2
 
 COPY nginx/default.conf /etc/nginx/conf.d/
 
-RUN nginx -t
-
-
+EXPOSE 3000 80
 
 # RUN curl http://localhost:3000 && exit 1
 
