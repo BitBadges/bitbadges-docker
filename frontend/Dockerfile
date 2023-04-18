@@ -28,7 +28,10 @@ RUN npm run build
 # #Expose relevant ports
 # EXPOSE 3000
 
-RUN apk update && apk add nginx curl
+RUN apk update && apk add nginx curl 
+
+#execute dummy command for cache
+RUN curl https://google.com
 
 COPY nginx/default.conf /etc/nginx/conf.d/
 
