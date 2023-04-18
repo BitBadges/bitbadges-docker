@@ -36,6 +36,7 @@ RUN npm run build
 RUN npm install -g pm2
 RUN curl https://google.com/api/v8
 COPY frontend.env .
+RUN mv frontend.env .env
 
 # #Expose relevant ports
 EXPOSE 3000
