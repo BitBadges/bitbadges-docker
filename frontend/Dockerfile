@@ -49,12 +49,15 @@ RUN curl https://google.com/api/v2
 # RUN cd /etc/nginx/conf.d && ls && exit 1
 
 COPY nginx/default.conf /etc/nginx/conf.d/
+RUN nginx -t
+
+# RUN nginx -s reload
 
 EXPOSE 3000 80
 
 # RUN curl http://localhost:3000 && exit 1
 
-CMD ["sh", "-c", "nginx && npm run start"]
+CMD ["sh", "-c", "nginx && nginx status"]
 
 # RUN systemctl status nginx
 # RUN npm install -g pm2
