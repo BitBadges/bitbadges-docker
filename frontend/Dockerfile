@@ -52,7 +52,7 @@ EXPOSE 3000 80
 
 # RUN curl http://localhost:3000 && exit 1
 
-CMD ["sh", "-c", "nginx -c /etc/nginx/conf.d/ && npm run start"]
+CMD ["sh", "-c", "nginx -c /etc/nginx/conf.d && npm run start"]
 
 # RUN systemctl status nginx
 # RUN npm install -g pm2
