@@ -1,4 +1,4 @@
-FROM node:16.13.0-alpine3.14
+FROM node:16.13.0-alpine3.14 as builder
 
 #Set up working directory and navigate
 WORKDIR /home
@@ -12,7 +12,7 @@ RUN apk update && apk add git openssh curl make wget bash
 #Run git clone with trevormil:ACCESS_TOKEN
 RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbadges-frontend.git
 
-COPY --from=builder /home/bitbadges-frontend /home/bitbadges-frontend
+
 WORKDIR /home/bitbadges-frontend
 
 
@@ -32,6 +32,7 @@ RUN npm run build
 
 FROM nginx:1.21.3-alpine
 
+COPY --from=builder /home/bitbadges-frontend /home/bitbadges-frontend
 WORKDIR /home/bitbadges-frontend
 
 #Install NPM
