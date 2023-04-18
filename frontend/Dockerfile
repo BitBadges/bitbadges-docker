@@ -8,7 +8,7 @@ ARG GITHUB_USERNAME
 #Install Git and SSH
 RUN apk update && apk add git openssh curl make wget bash
 
-RUN curl https://google.com/api/v6
+
 #Clone the private repository with Git credentials
 #Run git clone with trevormil:ACCESS_TOKEN
 RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbadges-frontend.git
@@ -33,7 +33,7 @@ RUN npm run build
 # COPY .env .
 # ENV $(cat $ENV_FILE | xargs)
 RUN npm install -g pm2
-
+RUN curl https://google.com/api/v6
 COPY frontend.env .
 
 # #Expose relevant ports
