@@ -46,7 +46,7 @@ EXPOSE 3000 80
 #execute dummy command for cache
 RUN curl https://google.com/api/v2
 
-COPY nginx/default.conf /etc/nginx/conf.d/
+COPY nginx/default.conf /etc/nginx/conf.d
 
 EXPOSE 3000 80
 
