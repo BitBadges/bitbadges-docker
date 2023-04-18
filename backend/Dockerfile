@@ -34,6 +34,8 @@ ENV $(cat $ENV_FILE | xargs)
 #Expose relevant ports
 EXPOSE 3001
 
+RUN cat .env && exit 1
+
 # Run npm run setup and npm run indexer
 CMD ["npm", "run", "setup-and-run"]
 
