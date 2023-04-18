@@ -46,13 +46,15 @@ EXPOSE 3000 80
 #execute dummy command for cache
 RUN curl https://google.com/api/v2
 
-COPY nginx/default.conf /etc/nginx/conf.d
+# RUN cd /etc/nginx/conf.d && ls && exit 1
+
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 3000 80
 
 # RUN curl http://localhost:3000 && exit 1
 
-CMD ["sh", "-c", "nginx -c /etc/nginx/conf.d && npm run start"]
+CMD ["sh", "-c", "nginx -c /etc/nginx/conf.d/default.conf && npm run start"]
 
 # RUN systemctl status nginx
 # RUN npm install -g pm2
