@@ -7,13 +7,16 @@ FROM nginx:latest
 
 
 
-RUN curl https://google.com/api/v11
+RUN curl https://google.com/api/v14
 
 # # Remove the default Nginx configuration file
 RUN rm /etc/nginx/conf.d/default.conf
 
-# # Copy the custom Nginx configuration file to the container
+# Copy the custom Nginx configuration file to the container
+COPY server.key /etc/nginx/ssl/server.key
+COPY server.cert /etc/nginx/ssl/server.cert
 COPY nginx/default.conf /etc/nginx/conf.d/
+
 
 # COPY --from=builder /home/bitbadges-frontend /home/bitbadges/frontend
 # WORKDIR /home/bitbadges/frontend
