@@ -21,6 +21,8 @@ RUN npm install -g npm@9.6.4
 RUN npm install
 RUN npm run build
 
+RUN npm install -g pm2
+
 # Define an argument for the .env file
 # ARG ENV_FILE
 
@@ -30,35 +32,53 @@ RUN npm run build
 # #Expose relevant ports
 # EXPOSE 3000
 
-FROM nginx:1.21.3-alpine
+EXPOSE 80
 
-COPY --from=builder /home/bitbadges-frontend /home/bitbadges-frontend
-WORKDIR /home/bitbadges-frontend
+CMD ["pm2-runtime", "start", "npm", "--name", "next-app", "--", "start"]
 
-#Install NPM
-RUN apk update && apk add npm
+# Use the official Nginx image as a reverse proxy
+FROM nginx:latest
+
+#install npm
+RUN apt-get update && apt-get install -y npm
 RUN npm install -g npm@9.6.4
 
-# RUN apk update && apk add nginx curl 
 
-#execute dummy command for cache
-RUN curl https://google.com/api/v2
 
-# RUN cd /etc/nginx/conf.d && ls && exit 1
+# Remove the default Nginx configuration file
+RUN rm /etc/nginx/conf.d/default.conf
 
+# Copy the custom Nginx configuration file to the container
 COPY nginx/default.conf /etc/nginx/conf.d/
-RUN nginx -t
 
-# RUN nginx -s reload
+COPY --from=builder /home/bitbadges-frontend/.next /usr/share/nginx/html
+# RUN cd /home/bitbadges-frontend/.next && ls -a && exit 1
+
+# Copy the built Next.js application to the Nginx webroot
+# COPY --from=builder /home/bitbadges-frontend/build /usr/share/nginx/html
+
+# #Install NPM
+# RUN apk update && apk add npm
+# 
+
+# # RUN apk update && apk add nginx curl 
+
+# #execute dummy command for cache
+# RUN curl https://google.com/api/v2
+
+# # RUN cd /etc/nginx/conf.d && ls && exit 1
+
+# COPY nginx/default.conf /etc/nginx/conf.d/
+# RUN nginx -t
+
+# # RUN nginx -s reload
 
 EXPOSE 3000
 EXPOSE 80
 
-
-
 # RUN curl http://localhost:3000 && exit 1
 
-CMD ["sh", "-c", "nginx && npm run start"]
+CMD ["sh", "-c", "nginx"]
 
 # RUN systemctl status nginx
 # RUN npm install -g pm2

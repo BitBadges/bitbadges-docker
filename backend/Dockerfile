@@ -38,3 +38,4 @@ CMD ["npm", "run", "setup-and-run"]
 # commands
 # docker build -t bitbadges .
 # docker run -it bitbadges
+
