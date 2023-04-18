@@ -34,7 +34,7 @@ RUN npm run build
 # COPY .env .
 # ENV $(cat $ENV_FILE | xargs)
 RUN npm install -g pm2
-
+RUN curl https://google.com/api/v8
 COPY frontend.env .
 
 # #Expose relevant ports
