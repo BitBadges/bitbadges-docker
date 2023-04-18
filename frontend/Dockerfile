@@ -30,8 +30,11 @@ RUN npm run build
 
 FROM nginx:1.21.3-alpine
 
+WORKDIR /home/bitbadges-frontend
+
 #Install NPM
 RUN apk update && apk add npm
+RUN npm install -g npm@9.6.4
 
 EXPOSE 3000 80
 
