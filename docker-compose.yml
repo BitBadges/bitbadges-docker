@@ -43,6 +43,8 @@ services:
     build:
       context: .
       dockerfile: ./frontend/Dockerfile
+    environment:
+      - BITBADGES_IO=true
     tty: true
     ports:
       - 3000:3000
