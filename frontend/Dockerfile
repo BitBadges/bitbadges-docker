@@ -12,7 +12,9 @@ RUN apk update && apk add git openssh curl make wget bash
 #Run git clone with trevormil:ACCESS_TOKEN
 RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbadges-frontend.git
 
+COPY --from=builder /home/bitbadges-frontend /home/bitbadges-frontend
 WORKDIR /home/bitbadges-frontend
+
 
 RUN npm install -g npm@9.6.4
 
