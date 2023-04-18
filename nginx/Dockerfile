@@ -7,7 +7,7 @@ FROM nginx:latest
 
 
 
-RUN curl https://google.com/api/v10
+RUN curl https://google.com/api/v11
 
 # # Remove the default Nginx configuration file
 RUN rm /etc/nginx/conf.d/default.conf
