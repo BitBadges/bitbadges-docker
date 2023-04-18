@@ -27,15 +27,23 @@ RUN npm run build
 
 # #Expose relevant ports
 # EXPOSE 3000
-
-RUN apk update && apk add nginx curl 
-
-#execute dummy command for cache
-RUN curl https://google.com/api/v2
+FROM nginx:1.21.3-alpine
 
 COPY nginx/default.conf /etc/nginx/conf.d/
 
-RUN nginx -t
+EXPOSE 3000 80
+
+# RUN apk update && apk add nginx curl 
+# RUN apk add openrc
+
+# #execute dummy command for cache
+# RUN curl https://google.com/api/v2
+
+
+
+# RUN nginx -t
+
+# RUN rc-service nginx status && exit 1
 
 # RUN curl http://localhost:3000 && exit 1
 
