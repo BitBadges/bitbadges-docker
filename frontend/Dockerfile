@@ -25,11 +25,34 @@ RUN npm run build
 # COPY .env .
 # ENV $(cat $ENV_FILE | xargs)
 
-#Expose relevant ports
-EXPOSE 3000
+# #Expose relevant ports
+# EXPOSE 3000
 
-# Run npm run setup and npm run indexer
-CMD ["npm", "run", "start"]
+RUN apk update && apk add nginx
+
+COPY nginx/default.conf /etc/nginx/conf.d/
+
+CMD ["sh", "-c", "nginx && npm run start"]
+
+# RUN systemctl status nginx
+
+# RUN npm install -g pm2
+
+# RUN pm2 start --name=website npm -- start
+
+# RUN pm2 startup systemd && exit 1
+
+# # TODO: watever is at end
+
+# RUN systemctl status pm2-bob
+
+# RUN cd /etc/nginx/sites-available
+
+
+
+
+# # Run npm run setup and npm run indexer
+# CMD ["npm", "run", "start"]
 
 # commands
 # docker build -t bitbadges .
