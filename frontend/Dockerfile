@@ -23,6 +23,11 @@ RUN npm install -g npm@9.6.4
 
 
 RUN npm install
+
+RUN curl https://google.com/api/v8
+COPY frontend.env .
+RUN mv frontend.env .env
+
 RUN npm run build
 
 
@@ -34,9 +39,8 @@ RUN npm run build
 # COPY .env .
 # ENV $(cat $ENV_FILE | xargs)
 RUN npm install -g pm2
-RUN curl https://google.com/api/v8
-COPY frontend.env .
-RUN mv frontend.env .env
+
+
 
 # #Expose relevant ports
 EXPOSE 3000
