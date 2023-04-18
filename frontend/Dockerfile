@@ -1,4 +1,4 @@
-FROM node:16.13.0-alpine3.14 as builder
+FROM node:16.13.0-alpine3.14
 
 #Set up working directory and navigate
 WORKDIR /home
