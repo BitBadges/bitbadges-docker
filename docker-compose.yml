@@ -46,10 +46,20 @@ services:
     tty: true
     ports:
       - 3000:3000
-      - 80:80
+      # - 80:80
     depends_on:
       - blockchain
       - couchdb
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    tty: true
+    ports:
+      - 80:80
+    depends_on:
+      - frontend
 
 volumes:
   data:
