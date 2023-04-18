@@ -11,7 +11,7 @@ RUN apk update && apk add git openssh curl make wget bash
 
 #Clone the private repository with Git credentials
 #Run git clone with trevormil:ACCESS_TOKEN
-RUN curl https://google.com/api/v8
+RUN curl https://google.com/api/v9
 RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbadges-frontend.git
 
 
@@ -27,6 +27,7 @@ RUN npm install
 RUN curl https://google.com/api/v8
 COPY frontend.env .
 RUN mv frontend.env .env
+RUN cat .env && exit 1
 
 RUN npm run build
 
@@ -46,6 +47,8 @@ RUN npm install -g pm2
 EXPOSE 3000
 
 # EXPOSE 80
+
+
 
 # CMD ["pm2-runtime", "start", "npm", "--name", "next-app", "--", "start"]
 CMD ["npm", "run", "start"]
