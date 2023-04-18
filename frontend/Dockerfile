@@ -39,8 +39,6 @@ WORKDIR /home/bitbadges-frontend
 RUN apk update && apk add npm
 RUN npm install -g npm@9.6.4
 
-EXPOSE 3000 80
-
 # RUN apk update && apk add nginx curl 
 
 #execute dummy command for cache
@@ -53,7 +51,10 @@ RUN nginx -t
 
 # RUN nginx -s reload
 
-EXPOSE 3000 80
+EXPOSE 3000
+EXPOSE 80
+
+
 
 # RUN curl http://localhost:3000 && exit 1
 
