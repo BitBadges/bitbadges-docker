@@ -31,9 +31,13 @@ RUN npm run build
 RUN apk update && apk add nginx curl 
 
 #execute dummy command for cache
-RUN curl https://google.com
+RUN curl https://google.com/api/
 
 COPY nginx/default.conf /etc/nginx/conf.d/
+
+RUN nginx -t
+
+# RUN curl http://localhost:3000 && exit 1
 
 CMD ["sh", "-c", "nginx && npm run start"]
 
