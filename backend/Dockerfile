@@ -22,9 +22,10 @@ RUN npm run build
 # Define an argument for the .env file
 ARG ENV_FILE
 
-COPY .env .
 COPY server.cert .
 COPY server.key .
+COPY .env .
+
 
 
 
