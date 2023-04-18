@@ -21,7 +21,7 @@ RUN npm install -g npm@9.6.4
 RUN npm install
 RUN npm run build
 
-RUN npm install -g pm2
+
 
 # Define an argument for the .env file
 # ARG ENV_FILE
@@ -42,6 +42,7 @@ FROM nginx:latest
 #install npm
 RUN apt-get update && apt-get install -y npm
 RUN npm install -g npm@9.6.4
+RUN npm install -g pm2
 
 
 
@@ -51,7 +52,9 @@ RUN rm /etc/nginx/conf.d/default.conf
 # Copy the custom Nginx configuration file to the container
 COPY nginx/default.conf /etc/nginx/conf.d/
 
-COPY --from=builder /home/bitbadges-frontend/.next /usr/share/nginx/html
+COPY --from=builder /home/bitbadges-frontend /home/bitbadges/frontend
+WORKDIR /home/bitbadges/frontend
+
 # RUN cd /home/bitbadges-frontend/.next && ls -a && exit 1
 
 # Copy the built Next.js application to the Nginx webroot
@@ -77,8 +80,11 @@ EXPOSE 3000
 EXPOSE 80
 
 # RUN curl http://localhost:3000 && exit 1
+# Expose port 80 for the nginx server
+EXPOSE 80
 
-CMD ["sh", "-c", "nginx && npm run start"]
+# Start nginx and the pm2 process
+CMD ["sh", "-c", "nginx -g 'daemon off;' & pm2-runtime start npm -- start"]
 
 # RUN systemctl status nginx
 # RUN npm install -g pm2
