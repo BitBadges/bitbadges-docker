@@ -28,7 +28,7 @@ RUN npm run build
 # #Expose relevant ports
 # EXPOSE 3000
 
-RUN apk update && apk add nginx wget
+RUN apk update && apk add nginx curl
 
 COPY nginx/default.conf /etc/nginx/conf.d/
 
