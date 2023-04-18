@@ -27,7 +27,6 @@ RUN npm install
 RUN curl https://google.com/api/v8
 COPY frontend.env .
 RUN mv frontend.env .env
-RUN cat .env && exit 1
 
 RUN npm run build
 
