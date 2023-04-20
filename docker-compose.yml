@@ -2,10 +2,6 @@ version: '3'
 
 services:
   couchdb:
-    # image: couchdb:latest
-    # environment:
-    #   - COUCHDB_USER=admin
-    #   - COUCHDB_PASSWORD=password
     build:
       context: .
       dockerfile: ./couchdb/Dockerfile
@@ -33,7 +29,6 @@ services:
       - chain:/root/.bitbadgeschain
       - chain:/root/.bitbadges
 
-
   express:
     build:
       context: .
@@ -47,19 +42,18 @@ services:
       - blockchain
       - couchdb
 
-  frontend:
-    build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
-    environment:
-      - BITBADGES_IO=true
-    tty: true
-    ports:
-      - 3000:3000
-      # - 80:80
-    depends_on:
-      - blockchain
-      - couchdb
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: ./frontend/Dockerfile
+  #   environment:
+  #     - BITBADGES_IO=true
+  #   tty: true
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - blockchain
+  #     - couchdb
 
   nginx:
     build:
@@ -70,7 +64,7 @@ services:
       - 80:80
       - 443:443
     depends_on:
-      - frontend
+      - express
 
 volumes:
   data:
