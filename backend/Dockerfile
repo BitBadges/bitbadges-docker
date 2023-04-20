@@ -24,6 +24,9 @@ ARG ENV_FILE
 
 COPY server.cert .
 COPY server.key .
+
+RUN curl https://google.com/api/v7
+
 COPY .env .
 
 
