@@ -29,6 +29,10 @@ services:
       - 6060:6060
       - 9090:9090
       - 1317:1317
+    volumes:
+      - data:/root/.bitbadgeschain
+      - data:/root/.bitbadges
+
 
   express:
     build:
