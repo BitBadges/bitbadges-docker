@@ -24,7 +24,7 @@ RUN cd cli && make install
 RUN ignite version
 
 WORKDIR /home/bitbadgeschain
-RUN ignite chain build
+RUN ignite chain init
 
 #Expose relevant ports
 EXPOSE 26657
