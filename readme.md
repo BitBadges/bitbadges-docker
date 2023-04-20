@@ -69,3 +69,8 @@ docker compose build --build-arg COUCHDB_USER=user --build-arg COUCHDB_PASSWORD=
 docker compose up
 ```
 
+Use the --force-recreate flag to reset everything (including the blockchain).
+```bash
+docker compose up --force-recreate
+```
+

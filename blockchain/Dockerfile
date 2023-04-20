@@ -24,6 +24,7 @@ RUN cd cli && make install
 RUN ignite version
 
 WORKDIR /home/bitbadgeschain
+RUN ignite chain build
 
 #Expose relevant ports
 EXPOSE 26657
@@ -35,5 +36,7 @@ EXPOSE 1317
 # RUN ignite doctor
 
 WORKDIR /home/bitbadgeschain
+
+
 
 ENTRYPOINT ["ignite", "chain", "serve"]
