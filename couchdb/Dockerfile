@@ -1,7 +1,4 @@
 FROM couchdb:latest
 
-ARG COUCHDB_USER
-ARG COUCHDB_PASSWORD
-
-ENV COUCHDB_USER=$COUCHDB_USER
-ENV COUCHDB_PASSWORD=$COUCHDB_PASSWORD
+# Optionally, you can copy a local.ini file that sets up additional configurations
+COPY local.ini /opt/couchdb/etc/local.d/local.ini
