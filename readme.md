@@ -69,8 +69,8 @@ docker compose build --build-arg COUCHDB_USER=user --build-arg COUCHDB_PASSWORD=
 docker compose up
 ```
 
-Use the --force-recreate flag to reset everything (including the blockchain).
+Use the --volumes flag to reset everything (i.e. the blockchain and couchDB data back to genesis).
 ```bash
-docker compose up --force-recreate
+docker compose down --volumes
 ```
 

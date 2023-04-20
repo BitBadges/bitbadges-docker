@@ -37,4 +37,4 @@ EXPOSE 1317
 
 WORKDIR /home/bitbadgeschain
 
-ENTRYPOINT ["bitbadgeschaind", "start"]
+ENTRYPOINT ["bitbadgeschaind", "start --api.enable --pruning nothing"]
