@@ -2,10 +2,14 @@ version: '3'
 
 services:
   couchdb:
-    image: couchdb:latest
-    environment:
-      - COUCHDB_USER=admin
-      - COUCHDB_PASSWORD=password
+    # image: couchdb:latest
+    # environment:
+    #   - COUCHDB_USER=admin
+    #   - COUCHDB_PASSWORD=password
+    build:
+      context: .
+      dockerfile: ./couchdb/Dockerfile
+    tty: true
     ports:
       - 5984:5984
     volumes:
