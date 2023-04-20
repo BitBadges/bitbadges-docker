@@ -37,6 +37,4 @@ EXPOSE 1317
 
 WORKDIR /home/bitbadgeschain
 
-
-
-ENTRYPOINT ["ignite", "chain", "serve"]
+ENTRYPOINT ["bitbadgeschaind", "start"]
