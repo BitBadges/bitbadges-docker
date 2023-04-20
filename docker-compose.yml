@@ -30,8 +30,8 @@ services:
       - 9090:9090
       - 1317:1317
     volumes:
-      - data:/root/.bitbadgeschain
-      - data:/root/.bitbadges
+      - chain:/root/.bitbadgeschain
+      - chain:/root/.bitbadges
 
 
   express:
@@ -74,3 +74,4 @@ services:
 
 volumes:
   data:
+  chain:
