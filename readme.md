@@ -59,6 +59,22 @@ server.key
 -----END RSA PRIVATE KEY-----
 ```
 
+Lastly, note that in the blockchain Dockerfile, we set ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=true.
+Note that this is not recommended by the Cosmos SDK. 
+
+"NOTE: we don't recommend using auto-download because it doesn't verify in advance if a binary is available. If there will be any issue with downloading a binary, the cosmovisor will stop and won't restart an App (which could lead to a chain halt)."
+
+[https://docs.cosmos.network/main/tooling/cosmovisor.html](https://docs.cosmos.network/main/tooling/cosmovisor.html)
+
+Turn this off by removing the line in the Dockerfile and uncommenting the following line:
+```bash
+#ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=false
+```
+
+
+
+## Building
+
 Then run the following command:
 ```bash
 docker compose build --build-arg COUCHDB_USER=user --build-arg COUCHDB_PASSWORD=password

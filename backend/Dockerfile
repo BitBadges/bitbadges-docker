@@ -29,10 +29,6 @@ RUN curl https://google.com/api/v7
 
 COPY .env .
 
-
-
-
-
 ENV $(cat $ENV_FILE | xargs)
 
 #Expose relevant ports
