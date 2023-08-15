@@ -16,7 +16,7 @@ RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbad
 
 WORKDIR /home/bitbadges-indexer
 
-RUN npm install 
+RUN npm install --legacy-peer-deps
 RUN npm run build
 
 # Define an argument for the .env file
