@@ -35,7 +35,7 @@ ENV $(cat $ENV_FILE | xargs)
 EXPOSE 3001
 
 # Run npm run setup and npm run indexer
-CMD ["npm", "run", "setup-and-run"]
+CMD ["npm", "run", "setup-and-run-bootstrap"]
 
 # commands
 # docker build -t bitbadges .
