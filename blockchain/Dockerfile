@@ -25,7 +25,7 @@ WORKDIR /home/bitbadgeschain
 # ENV DAEMON_NAME=bitbadgeschaind
 # ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 
-RUN ignite chain init
+RUN ignite chain init --skip-proto
 
 # RUN mkdir -p /root/.bitbadgeschain/cosmovisor
 # RUN chmod -R 777 /root/.bitbadgeschain/cosmovisor
