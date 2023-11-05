@@ -70,6 +70,6 @@ EXPOSE 1317
 # RUN systemctl enable bitbadgeschain.service
 # RUN systemctl start myprojectd
 
-ENTRYPOINT ["bitbadgeschaind", "start", "--api.enable", "--pruning", "nothing"]
+ENTRYPOINT ["bitbadgeschaind", "start", "--api.enable", "--api.enabled-unsafe-cors", "--pruning", "nothing"]
 
 
