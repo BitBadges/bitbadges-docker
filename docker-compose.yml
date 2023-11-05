@@ -38,7 +38,7 @@ services:
       dockerfile: ./backend/Dockerfile
       args: 
         - ENV_FILE=.env
-    command: start
+    command: setup-and-run-bootstrap
     tty: true
     ports:
       - 3001:3001
