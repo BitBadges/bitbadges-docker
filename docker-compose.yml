@@ -20,6 +20,7 @@ services:
         - ACCESS_TOKEN=enter_github_access_token
         - GITHUB_USERNAME=enter_github_username
     tty: true
+    command: start --api.enable --api.enabled-unsafe-cors --pruning nothing
     ports:
       - 26656:26656
       - 26657:26657
@@ -43,20 +44,6 @@ services:
     depends_on:
       - blockchain
       - couchdb
-
-  # frontend:
-  #   build:
-  #     context: .
-  #     dockerfile: ./frontend/Dockerfile
-  #   environment:
-  #     - BITBADGES_IO=true
-  #   tty: true
-  #   ports:
-  #     - 3000:3000
-  #   depends_on:
-  #     - blockchain
-  #     - couchdb
-
   nginx:
     build:
       context: .
