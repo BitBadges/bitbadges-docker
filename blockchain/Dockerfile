@@ -56,6 +56,6 @@ COPY --from=v1 /root/.bitbadgeschain/config /root/.bitbadgeschain/config
 COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
 COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
 
-RUN ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
+# RUN ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
 
 ENTRYPOINT [ "cosmovisor" ]
