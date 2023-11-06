@@ -30,7 +30,6 @@ services:
       - 1317:1317
     volumes:
       - chain:/root/.bitbadgeschain
-      - chain:/root/.bitbadges
 
   express:
     build:

@@ -1,4 +1,4 @@
-# Bootstrap using th express container
+# Bootstrap using the express container
 start:
 	docker compose up -d
 
