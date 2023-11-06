@@ -19,7 +19,7 @@ RUN ignite version
 ENV VERSION=v0.1
 
 #Clone the repository
-RUN git clone --branch ${COSMOS_VERSION} https://github.com/bitbadges/bitbadgeschain.git
+RUN git clone --branch ${VERSION} https://github.com/bitbadges/bitbadgeschain.git
 
 WORKDIR /home/bitbadgeschain
 
