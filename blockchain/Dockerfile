@@ -54,7 +54,7 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin/${DAEMON_NAME}
 COPY --from=v1 /root/.bitbadgeschain/data /root/.bitbadgeschain/data 
 COPY --from=v1 /root/.bitbadgeschain/config /root/.bitbadgeschain/config
 COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
-COPY --from=v1 /go/bin/bitbadgeschaind/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
+COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin
 
 # RUN ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
 
