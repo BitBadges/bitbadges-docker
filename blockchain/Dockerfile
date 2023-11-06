@@ -43,6 +43,7 @@ ENV DAEMON_NAME=bitbadgeschaind
 ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=false
 ENV DAEMON_RESTART_AFTER_UPGRADE=true
 
+RUN mkdir ${DAEMON_HOME}
 RUN mkdir ${DAEMON_HOME}/cosmovisor
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
