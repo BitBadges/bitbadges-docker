@@ -43,17 +43,16 @@ RUN make cosmovisor
 FROM --platform=linux alpine
 
 ENV LOCAL=/usr/local
-ENV DAEMON_HOME=/root/.bitbadgeschain-upgrade
+ENV DAEMON_HOME=/root/.bitbadgeschain
 ENV DAEMON_NAME=bitbadgeschaind
 ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=false
 ENV DAEMON_RESTART_AFTER_UPGRADE=true
 
 COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
+COPY --from=v1 /root/.bitbadgeschain /root/.bitbadgeschain
 COPY --from=v1 /go/bin/bitbadgeschaind $DAEMON_HOME/cosmovisor/genesis/bin/bitbadgeschaind
 
 # COPY --from=v1.1 /usr/local/bin/bitbadgeschaind $DAEMON_HOME/cosmovisor/upgrades/v1tov1_1/bin/checkersd
 # COPY --from=v2 /usr/local/bin/checkersd $DAEMON_HOME/cosmovisor/upgrades/v1_1tov2/bin/checkersd
-
-RUN cosmovisor --help && exit 1
 
 ENTRYPOINT [ "cosmovisor" ]
