@@ -20,6 +20,7 @@ WORKDIR /home/bitbadgeschain
 
 RUN ignite chain init --skip-proto
 
+WORKDIR /
 
 FROM --platform=linux golang:1.18.7-alpine AS builder
 
@@ -48,6 +49,7 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
+RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin/${DAEMON_NAME}
 
 COPY --from=v1 /root/.bitbadgeschain/data /root/.bitbadgeschain/data 
 COPY --from=v1 /root/.bitbadgeschain/config /root/.bitbadgeschain/config
