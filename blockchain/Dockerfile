@@ -38,7 +38,7 @@ WORKDIR /root/cosmos-sdk/cosmovisor
 
 RUN make cosmovisor
 
-FROM --platform=linux alpine
+FROM --platform=linux golang:1.19
 
 WORKDIR /
 
