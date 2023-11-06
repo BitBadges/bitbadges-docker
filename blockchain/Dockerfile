@@ -49,7 +49,6 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
-RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin/${DAEMON_NAME}
 
 COPY --from=v1 /root/.bitbadgeschain/data /root/.bitbadgeschain/data 
 COPY --from=v1 /root/.bitbadgeschain/config /root/.bitbadgeschain/config
