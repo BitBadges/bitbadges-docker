@@ -21,5 +21,6 @@ prune:
 	docker system prune
 
 pull:
+	git clean -idf
+	git pull origin $(shell git rev-parse --abbrev-ref HEAD)
 	docker compose build --no-cache
-
