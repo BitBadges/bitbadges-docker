@@ -57,10 +57,9 @@ ENV VERSION=v0.1
 
 #Clone the repository
 RUN git clone --branch ${VERSION} https://github.com/bitbadges/bitbadgeschain.git
-
 WORKDIR /home/bitbadgeschain
-
 RUN ignite chain init --skip-proto
+
 
 
 WORKDIR /
@@ -77,9 +76,6 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
 
 COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
-
 COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
-
-RUN go version
 
 ENTRYPOINT [ "cosmovisor" ]
