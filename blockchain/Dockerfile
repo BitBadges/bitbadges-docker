@@ -38,7 +38,7 @@ WORKDIR /root/cosmos-sdk/cosmovisor
 
 RUN make cosmovisor
 
-FROM --platform=linux golang:1.19
+FROM golang:1.19
 
 #Install Git
 RUN apt-get update && apt-get install -y git curl
