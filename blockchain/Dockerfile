@@ -43,10 +43,14 @@ ENV DAEMON_NAME=bitbadgeschaind
 ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=false
 ENV DAEMON_RESTART_AFTER_UPGRADE=true
 
+RUN mkdir ${DAEMON_HOME}/cosmovisor
+RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
+RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
+RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
 
 COPY --from=v1 /root/.bitbadgeschain/ /root/.bitbadgeschain/
 COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
-COPY --from=v1 /go/bin/bitbadgeschaind $DAEMON_HOME/cosmovisor/genesis/bin/bitbadgeschaind
+COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
 
 
 ENTRYPOINT [ "cosmovisor" ]
