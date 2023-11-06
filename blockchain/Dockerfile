@@ -40,6 +40,8 @@ RUN make cosmovisor
 
 FROM golang:1.19
 
+
+
 #Install Git
 RUN apt-get update && apt-get install -y git curl
 # RUN git clone https://github.com/ignite/cli.git --depth=1
@@ -51,6 +53,16 @@ RUN curl https://get.ignite.com/cli@v0.26.1 | bash
 RUN mv ignite /usr/local/bin
 RUN ignite version
 
+ENV VERSION=v0.1
+
+#Clone the repository
+RUN git clone --branch ${VERSION} https://github.com/bitbadges/bitbadgeschain.git
+
+WORKDIR /home/bitbadgeschain
+
+RUN ignite chain init --skip-proto
+
+
 WORKDIR /
 
 ENV LOCAL=/usr/local
@@ -58,6 +70,8 @@ ENV DAEMON_HOME=/root/.bitbadgeschain
 ENV DAEMON_NAME=bitbadgeschaind
 ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=false
 ENV DAEMON_RESTART_AFTER_UPGRADE=true
+
+
 
 RUN mkdir ${DAEMON_HOME}
 RUN mkdir ${DAEMON_HOME}/cosmovisor 
