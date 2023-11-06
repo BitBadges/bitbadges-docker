@@ -40,6 +40,17 @@ RUN make cosmovisor
 
 FROM --platform=linux golang:1.19
 
+#Install Git
+RUN apt-get update && apt-get install -y git curl
+# RUN git clone https://github.com/ignite/cli.git --depth=1
+RUN apt-get install -y make wget
+
+#Set up working directory and navigate
+WORKDIR /home
+RUN curl https://get.ignite.com/cli@v0.26.1 | bash
+RUN mv ignite /usr/local/bin
+RUN ignite version
+
 WORKDIR /
 
 ENV LOCAL=/usr/local
@@ -54,6 +65,8 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
 
+
+
 COPY --from=v1 /root/.bitbadgeschain/data /root/.bitbadgeschain/data 
 COPY --from=v1 /root/.bitbadgeschain/config /root/.bitbadgeschain/config
 COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
@@ -62,7 +75,5 @@ COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bit
 
 RUN go version
 RUN ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
-
-RUN ls -la /root/.bitbadgeschain/cosmovisor/genesis/bin/bitbadgeschaind && exit 1
 
 ENTRYPOINT [ "cosmovisor" ]
