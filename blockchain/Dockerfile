@@ -25,7 +25,7 @@ WORKDIR /home/bitbadgeschain
 
 RUN ignite chain init --skip-proto
 
-RUN ls -la /home/bitbadgeschain && exit 1
+RUN which bitbadgeschaind && exit 1
 
 
 FROM --platform=linux golang:1.18.7-alpine AS builder
