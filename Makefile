@@ -3,7 +3,7 @@ start:
 	docker compose up -d
 
 bootstrap:
-	docker run --rm -it -v bitbadges_docker_express:latest bootstrap
+	docker run --rm -it bitbadges-docker-express:latest bootstrap
 
 build:
 	docker compose build
@@ -19,3 +19,7 @@ stop:
 
 prune: 
 	docker system prune
+
+pull:
+	docker compose build --no-cache
+
