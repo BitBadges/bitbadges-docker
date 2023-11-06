@@ -21,9 +21,6 @@ WORKDIR /home/bitbadgeschain
 RUN ignite chain init --skip-proto
 
 
-RUN /go/bin/bitbadgeschaind status && exit 1
-
-
 FROM --platform=linux golang:1.18.7-alpine AS builder
 
 ENV COSMOS_VERSION=v0.46.7
