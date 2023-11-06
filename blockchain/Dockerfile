@@ -8,7 +8,6 @@ RUN apt-get install -y make wget
 #Set up working directory and navigate
 WORKDIR /home
 
-
 #Install Ignite CLI
 RUN curl https://get.ignite.com! | bash
 RUN git clone https://github.com/ignite/cli.git --depth=1 --branch v0.26.1
