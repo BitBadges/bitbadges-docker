@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  blockchain:
+    extends:
+      file: docker-compose.yml
+      service: blockchain
+    build: 
+      context: .
+      dockerfile: ./cosmovisor/Dockerfile
