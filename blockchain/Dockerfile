@@ -27,9 +27,9 @@ ENTRYPOINT [ "bitbadgeschaind" ]
 FROM --platform=linux golang:1.19 AS builder
 
 ENV COSMOS_VERSION=v0.46.7
-
-RUN apk update
-RUN apk add make git
+RUN apt-get update && apt-get install -y git curl
+# RUN git clone https://github.com/ignite/cli.git --depth=1
+RUN apt-get install -y make wget
 
 WORKDIR /root
 RUN git clone --depth 1 --branch ${COSMOS_VERSION} https://github.com/cosmos/cosmos-sdk.git
