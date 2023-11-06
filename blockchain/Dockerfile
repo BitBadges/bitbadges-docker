@@ -60,7 +60,8 @@ COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovis
 
 COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
 
-RUN ls -la ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind && exit 1
+# RUN ls -la ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind && exit 1
+RUN cat ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind && exit 1
 
 RUN ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
 
