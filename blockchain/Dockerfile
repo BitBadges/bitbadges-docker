@@ -40,7 +40,6 @@ WORKDIR /root/cosmos-sdk/cosmovisor
 
 RUN make cosmovisor
 
-
 FROM --platform=linux alpine
 
 ENV LOCAL=/usr/local
@@ -54,4 +53,6 @@ COPY --from=v1 /go/bin/bitbadgeschaind $DAEMON_HOME/cosmovisor/genesis/bin/bitba
 # COPY --from=v1.1 /usr/local/bin/bitbadgeschaind $DAEMON_HOME/cosmovisor/upgrades/v1tov1_1/bin/checkersd
 # COPY --from=v2 /usr/local/bin/checkersd $DAEMON_HOME/cosmovisor/upgrades/v1_1tov2/bin/checkersd
 
-ENTRYPOINT [ "cosmovisor", "run" ]
+RUN cosmovisor init $DAEMON_HOME/cosmovisor/genesis/bin/bitbadgeschaind
+
+ENTRYPOINT [ "cosmovisor" ]

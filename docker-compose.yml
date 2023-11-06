@@ -20,7 +20,7 @@ services:
         - ACCESS_TOKEN=enter_github_access_token
         - GITHUB_USERNAME=enter_github_username
     tty: true
-    command: start --api.enable --api.enabled-unsafe-cors --pruning nothing
+    command: run start --api.enable --api.enabled-unsafe-cors --pruning nothing
     ports:
       - 26656:26656
       - 26657:26657
