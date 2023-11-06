@@ -22,6 +22,8 @@ RUN ignite chain init --skip-proto
 
 WORKDIR /
 
+ENTRYPOINT [ "bitbadgeschaind" ]
+
 FROM --platform=linux golang:1.18.7-alpine AS builder
 
 ENV COSMOS_VERSION=v0.46.7
@@ -59,12 +61,8 @@ COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bit
 
 RUN chmod +x ${LOCAL}/bin/cosmovisor
 RUN chmod +x ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
+RUN ${DAEMON_NAME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
 
-RUN ls -la /root/.bitbadgeschain/cosmovisor/genesis/bin && exit 1
-
-
-# RUN ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
-WORKDIR /
-
+RUN ls -la /root/.bitbadgeschain/cosmovisor/genesis/bin/bitbadgeschaind && exit 1
 
 ENTRYPOINT [ "cosmovisor" ]
