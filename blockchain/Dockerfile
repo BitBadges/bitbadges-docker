@@ -62,7 +62,7 @@ RUN chmod +x ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
 
 
 # RUN ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
-
+WORKDIR /
 
 
 ENTRYPOINT [ "cosmovisor" ]
