@@ -61,4 +61,8 @@ COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bit
 RUN chmod +x ${LOCAL}/bin/cosmovisor
 RUN chmod +x ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
 
+RUN ls -la ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
+
+
+
 ENTRYPOINT [ "cosmovisor" ]
