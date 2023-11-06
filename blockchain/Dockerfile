@@ -1,28 +1,28 @@
-FROM golang:1.19 as v1
+# FROM golang:1.19 as v1
 
-#Install Git
-RUN apt-get update && apt-get install -y git curl
-# RUN git clone https://github.com/ignite/cli.git --depth=1
-RUN apt-get install -y make wget
+# #Install Git
+# RUN apt-get update && apt-get install -y git curl
+# # RUN git clone https://github.com/ignite/cli.git --depth=1
+# RUN apt-get install -y make wget
 
-#Set up working directory and navigate
-WORKDIR /home
-RUN curl https://get.ignite.com/cli@v0.26.1 | bash
-RUN mv ignite /usr/local/bin
-RUN ignite version
+# #Set up working directory and navigate
+# WORKDIR /home
+# RUN curl https://get.ignite.com/cli@v0.26.1 | bash
+# RUN mv ignite /usr/local/bin
+# RUN ignite version
 
-ENV VERSION=v0.1
+# ENV VERSION=v0.1
 
-#Clone the repository
-RUN git clone --branch ${VERSION} https://github.com/bitbadges/bitbadgeschain.git
+# #Clone the repository
+# RUN git clone --branch ${VERSION} https://github.com/bitbadges/bitbadgeschain.git
 
-WORKDIR /home/bitbadgeschain
+# WORKDIR /home/bitbadgeschain
 
-RUN ignite chain init --skip-proto
+# RUN ignite chain init --skip-proto
 
-WORKDIR /
+# WORKDIR /
 
-ENTRYPOINT [ "bitbadgeschaind" ]
+# ENTRYPOINT [ "bitbadgeschaind" ]
 
 FROM --platform=linux golang:1.18.7-alpine AS builder
 
@@ -54,11 +54,30 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
 
-COPY --from=v1 /root/.bitbadgeschain/data /root/.bitbadgeschain/data 
-COPY --from=v1 /root/.bitbadgeschain/config /root/.bitbadgeschain/config
+
+#Install Git
+RUN apt-get update && apt-get install -y git curl
+# RUN git clone https://github.com/ignite/cli.git --depth=1
+RUN apt-get install -y make wget
+
+#Set up working directory and navigate
+WORKDIR /home
+RUN curl https://get.ignite.com/cli@v0.26.1 | bash
+RUN mv ignite /usr/local/bin
+RUN ignite version
+
+ENV VERSION=v0.1
+
+#Clone the repository
+RUN git clone --branch ${VERSION} https://github.com/bitbadges/bitbadgeschain.git
+
+WORKDIR /home/bitbadgeschain
+
+RUN ignite chain init --skip-proto
+
 COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
 
-COPY --from=v1 /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
+COPY /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
 
 
 RUN ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind status && exit 1
