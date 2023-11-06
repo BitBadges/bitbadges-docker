@@ -38,6 +38,8 @@ WORKDIR /root/cosmos-sdk/cosmovisor
 
 RUN make cosmovisor
 
+FROM --platform=linux alpine
+
 WORKDIR /
 
 ENV LOCAL=/usr/local
