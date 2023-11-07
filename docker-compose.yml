@@ -2,23 +2,18 @@ version: '3'
 
 services:
   couchdb:
-    build:
-      context: .
-      dockerfile: ./couchdb/Dockerfile
+    image: couchdb:latest
     tty: true
     ports:
       - 5984:5984
     volumes:
       - data:/opt/couchdb/data
+      - local.ini:/opt/couchdb/etc/local.d/local.ini
 
   blockchain:
     build:
       context: .
       dockerfile: ./blockchain/Dockerfile
-      
-      args: 
-        - ACCESS_TOKEN=enter_github_access_token
-        - GITHUB_USERNAME=enter_github_username
     tty: true
     command: run start --api.enable --api.enabled-unsafe-cors --pruning nothing
     ports:
@@ -28,6 +23,9 @@ services:
       - 6060:6060
       - 9090:9090
       - 1317:1317
+    # volumes:
+    #   - blockchain-config/config:/root/.bitbadgeschain/config
+    #   - blockchain-config/data:/root/.bitbadgeschain/data
 
 
   express:
@@ -36,12 +34,13 @@ services:
       dockerfile: ./backend/Dockerfile
       args: 
         - ENV_FILE=.env
-    command: setup-and-run-bootstrap
+    command: setup-and-run 
     tty: true
     ports:
       - 3001:3001
     depends_on:
       - couchdb
+
   nginx:
     build:
       context: .

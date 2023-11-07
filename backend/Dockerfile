@@ -9,9 +9,6 @@ ARG GITHUB_USERNAME
 RUN apk update && apk add git openssh curl make wget bash
 
 #Clone the private repository with Git credentials
-#Run git clone with trevormil:ACCESS_TOKEN
-RUN curl https://google.com/api/v8
-
 RUN git clone https://$GITHUB_USERNAME:$ACCESS_TOKEN@github.com/bitbadges/bitbadges-indexer.git
 
 WORKDIR /home/bitbadges-indexer
@@ -22,11 +19,6 @@ RUN npm run build
 # Define an argument for the .env file
 ARG ENV_FILE
 
-COPY server.cert .
-COPY server.key .
-
-RUN curl https://google.com/api/v7
-
 COPY .env .
 
 ENV $(cat $ENV_FILE | xargs)
@@ -36,9 +28,3 @@ EXPOSE 3001
 
 # Run npm run setup and npm run indexer
 ENTRYPOINT ["npm", "run"]
-
-# commands
-# docker build -t bitbadges .
-# docker run -it bitbadges
-
-    
