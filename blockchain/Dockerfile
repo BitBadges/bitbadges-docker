@@ -19,8 +19,6 @@ FROM golang:1.19 as v1
 RUN apt-get update && apt-get install -y git curl
 RUN apt-get install -y make wget
 
-RUN mkdir /go/bin
-
 #Set up working directory and navigate
 #Build genesis version of the chain with ignite
 WORKDIR /home
@@ -51,6 +49,8 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
 
 COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
-COPY /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
+RUN which bitbadgeschaind && exit 1
+
+# COPY /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
 
 ENTRYPOINT [ "cosmovisor" ]
