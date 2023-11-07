@@ -19,6 +19,8 @@ FROM golang:1.19 as v1
 RUN apt-get update && apt-get install -y git curl
 RUN apt-get install -y make wget
 
+RUN mkdir /go/bin
+
 #Set up working directory and navigate
 #Build genesis version of the chain with ignite
 WORKDIR /home
