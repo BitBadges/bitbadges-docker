@@ -1,14 +1,6 @@
 # # Use the official Nginx image as a reverse proxy
 FROM nginx:latest
 
-# # #install npm
-# RUN apt-get update && apt-get install -y npm
-# RUN npm install -g npm@9.6.4
-
-
-
-RUN curl https://google.com/api/v14
-
 # # Remove the default Nginx configuration file
 RUN rm /etc/nginx/conf.d/default.conf
 
