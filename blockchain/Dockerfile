@@ -8,7 +8,7 @@ RUN apt-get install -y make wget
 WORKDIR /root
 RUN git clone --depth 1 --branch ${COSMOS_VERSION} https://github.com/cosmos/cosmos-sdk.git
 
-WORKDIR /root/cosmos-sdk/cosmovisor
+WORKDIR /root/cosmos-sdk/tools/cosmovisor
 
 RUN make cosmovisor
 
