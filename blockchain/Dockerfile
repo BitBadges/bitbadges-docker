@@ -1,6 +1,6 @@
-FROM --platform=linux golang:1.19 AS builder
+FROM --platform=linux golang:1.21 AS builder
 
-ENV COSMOS_VERSION=v0.46.7
+ENV COSMOS_VERSION=v0.47.5
 RUN apt-get update && apt-get install -y git curl
 # RUN git clone https://github.com/ignite/cli.git --depth=1
 RUN apt-get install -y make wget
@@ -13,7 +13,7 @@ WORKDIR /root/cosmos-sdk/cosmovisor
 RUN make cosmovisor
 
 
-FROM golang:1.19 as v1
+FROM golang:1.21 as v1
 
 #Install dependencies
 RUN apt-get update && apt-get install -y git curl
@@ -22,14 +22,16 @@ RUN apt-get install -y make wget
 #Set up working directory and navigate
 #Build genesis version of the chain with ignite
 WORKDIR /home
-RUN curl https://get.ignite.com/cli@v0.26.1 | bash
+RUN curl https://get.ignite.com/cli@v0.27.2 | bash
 RUN mv ignite /usr/local/bin
 RUN ignite version
 
 
 #Clone the repository
-ENV VERSION=v0.1
-RUN git clone --branch ${VERSION} https://github.com/bitbadges/bitbadgeschain.git
+# ENV VERSION=v0.1
+# RUN git clone --branch ${VERSION} https://github.com/bitbadges/bitbadgeschain.git
+RUN git clone https://github.com/bitbadges/bitbadgeschain.git
+
 
 WORKDIR /home/bitbadgeschain
 
