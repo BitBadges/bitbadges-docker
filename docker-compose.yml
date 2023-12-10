@@ -1,15 +1,6 @@
 version: '3'
 
 services:
-  couchdb:
-    image: couchdb:latest
-    tty: true
-    ports:
-      - 5984:5984
-    volumes:
-      - data:/opt/couchdb/data
-      - ./local.ini:/opt/couchdb/etc/local.d/local.ini
-
   blockchain:
     build:
       context: .
@@ -38,8 +29,6 @@ services:
     tty: true
     ports:
       - 3001:3001
-    depends_on:
-      - couchdb
 
   nginx:
     build:
