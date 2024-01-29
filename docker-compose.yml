@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./blockchain/Dockerfile
     tty: true
-    command: run start --api.enable --api.enabled-unsafe-cors --pruning nothing
+    command: run start --api.enable --api.enabled-unsafe-cors --pruning nothing --inv-check-period 10
     ports:
       - 26656:26656
       - 26657:26657
