@@ -61,8 +61,8 @@ WORKDIR /home/.bitbadgeschain/bip322-js
 RUN npm install
 RUN npm run build
 
-RUN mkdir /home/.bitbadgeschain/cosmovisor/upgrades/v1.0-betanet
-RUN touch /home/.bitbadgeschain/cosmovisor/upgrades/v1.0-betanet/genesis.json
+RUN mkdir  ${DAEMON_HOME}/upgrades/v1.0-betanet
+RUN touch  ${DAEMON_HOME}/upgrades/v1.0-betanet/genesis.json
 
 EXPOSE 26656 26657 26660 6060 9090 1317
 
