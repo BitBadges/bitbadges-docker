@@ -1,13 +1,13 @@
 FROM --platform=linux golang:1.21 AS builder
 
-ENV COSMOS_VERSION=v0.46.7
+ENV COSMOS_VERSION=v0.47.5
 RUN apt-get update && apt-get install -y git curl
 RUN apt-get install -y make wget
 
 WORKDIR /root
 RUN git clone --depth 1 --branch ${COSMOS_VERSION} https://github.com/cosmos/cosmos-sdk.git
 
-WORKDIR /root/cosmos-sdk/cosmovisor
+WORKDIR /root/cosmos-sdk/tools/cosmovisor
 
 RUN make cosmovisor
 
@@ -47,7 +47,7 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
 
-COPY --from=builder /root/cosmos-sdk/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
+COPY --from=builder /root/cosmos-sdk/tools/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
 
 RUN mv /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
 
