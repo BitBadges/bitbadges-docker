@@ -47,15 +47,21 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
 
-# example upgrade
-# RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades/testing/
-# RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades/testing/bin
 
 COPY --from=builder /root/cosmos-sdk/tools/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
 
 RUN mv /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
-# Example upgrade
-# RUN cp ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/upgrades/testing/bin/bitbadgeschaind
+
+ARG BUILD_LATEST_ONLY=false
+RUN if [ "$BUILD_LATEST_ONLY" = "true" ]; then \
+    echo "Building latest binary only"; \
+    else \
+    echo "Building all binaries"; \
+    # Build all the binaries
+    # mkdir ${DAEMON_HOME}/cosmovisor/upgrades/testing/; \
+    # mkdir ${DAEMON_HOME}/cosmovisor/upgrades/testing/bin; \
+    # cp ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/upgrades/testing/bin/bitbadgeschaind; \
+    fi
 
 # install npm and bip322-js
 RUN apt-get update && apt-get install -y npm
