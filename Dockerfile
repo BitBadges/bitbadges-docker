@@ -47,9 +47,15 @@ RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis
 RUN mkdir ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades
 
+# example upgrade
+# RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades/testing/
+# RUN mkdir ${DAEMON_HOME}/cosmovisor/upgrades/testing/bin
+
 COPY --from=builder /root/cosmos-sdk/tools/cosmovisor/cosmovisor ${LOCAL}/bin/cosmovisor
 
 RUN mv /go/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind
+# Example upgrade
+# RUN cp ${DAEMON_HOME}/cosmovisor/genesis/bin/bitbadgeschaind ${DAEMON_HOME}/cosmovisor/upgrades/testing/bin/bitbadgeschaind
 
 # install npm and bip322-js
 RUN apt-get update && apt-get install -y npm
@@ -60,9 +66,6 @@ RUN git clone https://github.com/BitBadges/bip322-js
 WORKDIR /home/.bitbadgeschain/bip322-js
 RUN npm install
 RUN npm run build
-
-RUN mkdir  ${DAEMON_HOME}/cosmovisor/upgrades/v1.0-betanet
-RUN touch  ${DAEMON_HOME}/cosmovisor/upgrades/v1.0-betanet/genesis.json
 
 EXPOSE 26656 26657 26660 6060 9090 1317
 
